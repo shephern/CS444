@@ -2,11 +2,11 @@ if BLOCK
 
 menu "IO Schedulers"
 
-config IOSCHED_NOOP
+config IOSCHED_SSTF
 	bool
 	default y
 	---help---
-	  The no-op I/O scheduler is a minimal scheduler that does basic merging
+	  The sstf I/O scheduler is a minimal scheduler that does basic merging
 	  and sorting. Its main uses include non-disk based block devices like
 	  memory devices, and specialised software or hardware environments
 	  that do their own scheduling and require only minimal assistance from
@@ -52,8 +52,8 @@ choice
 	config DEFAULT_CFQ
 		bool "CFQ" if IOSCHED_CFQ=y
 
-	config DEFAULT_NOOP
-		bool "No-op"
+	config DEFAULT_SSTF
+		bool "SSTF"
 
 endchoice
 
@@ -61,7 +61,7 @@ config DEFAULT_IOSCHED
 	string
 	default "deadline" if DEFAULT_DEADLINE
 	default "cfq" if DEFAULT_CFQ
-	default "noop" if DEFAULT_NOOP
+	default "SSTF" if DEFAULT_SSTF
 
 endmenu
 
